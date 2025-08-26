@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: 0x-launch-kit-backend
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: HTTP_PORT
+        value: "3000"
+      - key: ETHEREUM_RPC_URL
+        value: https://mainnet.infura.io/
+      - key: NETWORK_ID
+        value: "1"
+      - key: CHAIN_ID
+        value: "1"
+      - key: WHITELIST_ALL_TOKENS
+        value: "true"
+      - key: FEE_RECIPIENT
+        value: 0x0000000000000000000000000000000000000000
+      - key: MAKER_FEE_UNIT_AMOUNT
+        value: "0"
+      - key: TAKER_FEE_UNIT_AMOUNT
+        value: "0"
+      - key: POSTGRES_URI
+        value: postgresql://api:api@postgres/api
+
+databases:
+  - name: postgres
+    databaseName: api
+    user: api
+    plan: starter
